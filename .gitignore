@@ -9,4 +9,4 @@ release
 *.pro
 *.vcxproj
 *.filters
-
+*.ui
