@@ -9,47 +9,52 @@
 #include "Cavalier.h"
 #include "Fou.h"
 #include <qtablewidget.h>
-
+#include  <QLabel>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class PlateauEchec; }
 QT_END_NAMESPACE
 
-class PlateauEchec : public QMainWindow
+namespace Plateau
 {
-    Q_OBJECT
 
-public:
-    PlateauEchec(QWidget *parent = nullptr);
-    ~PlateauEchec();
+	using namespace std;
 
-public slots:
-    void mouvement(int x, int y);
+	using Ajout::Couleur;
+	using Ajout::Position;
+	using PieceTableau::Piece;
 
-    void resizeEvent(QResizeEvent*);
+	class PlateauEchec : public QMainWindow
+	{
+		Q_OBJECT
+
+	public:
+		PlateauEchec(QWidget* parent = nullptr);
+		~PlateauEchec();
+
+	public slots:
+		void mouvement(int x, int y);
+		void resizeEvent(QResizeEvent*);
+
+	private:
+		void eliminationPieceVue(const QIcon& icon, bool estNoir);
+		bool caseNoir(Position position);
+		void coloriageCasePermi(Position positionPieceSelectionne);
+		void remettreCouleurCaseAvant();
+		void initialisationFenetre();
+		void mouvementValide(shared_ptr<Piece> piece, Position position);
+		void mouvementInvalide(shared_ptr<Piece> piece, Position position);
+		void afficherSignalement(shared_ptr<Piece> pieceSelectionneModele, Position positionFinale);
+
+		Ui::PlateauEchec* ui;
+		Position positionPieceSelectionne;
+		bool premierClic = true;
+		bool tourBlanc = true;
 
 
-private:
+		PieceTableau::Plateau* plateau = PieceTableau::Plateau::getInstancePlateau();
+		vector<Position> listeCaseColoriee;
 
-    void couleurSelection(int x, int y);
-    bool caseNoir(Position position);
-    void emphaseCaseDeplacement(int x, int y);
-    Ui::PlateauEchec *ui;
-    Position positionAvant;
-    bool premierClic = true;
-
-    //Initialisation des pièces
-    shared_ptr<Piece> roiBlanc = Roi::getInstanceRoi(Couleur::blanc);
-    shared_ptr<Piece> roiNoir  = Roi::getInstanceRoi(Couleur::noir);
-
-    shared_ptr<Piece> cavalierNoirG  = Cavalier::getInstanceCavalierGauche(Couleur::noir);
-    shared_ptr<Piece> cavalierBlancG = Cavalier::getInstanceCavalierGauche(Couleur::blanc);
-
-    shared_ptr<Piece> fouNoirD = Fou::getInstanceFouDroite(Couleur::noir);
-    shared_ptr<Piece> fouBlancD = Fou::getInstanceFouDroite(Couleur::blanc);
-    Plateau* chessBoard = Plateau::getInstancePlateau();
-    vector<Position> listeBrushRouge;
-    void remettreBrushAvant();
-
-};
+	};
+}
 #endif // PLATEAUECHEC_H

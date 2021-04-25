@@ -3,32 +3,43 @@
 #include <iostream>
 #include "Ajout.h"
 
-using namespace std;
 
-class Cavalier: public Piece
+namespace Cavalier
 {
-public:
 
-    Cavalier(Cavalier* cavalier);
+	using namespace std;
 
-    static shared_ptr<Piece> getInstanceCavalierGauche(Couleur couleur);
-    static shared_ptr<Piece> getInstanceCavalierDroite(Couleur couleur);
-
-
-private:
-
-    bool validationMouvement(Position positionApres, vector<vector<shared_ptr<Piece>>>& tableauEchec);
+	using PieceTableau::Piece;
+	using Ajout::Couleur;
+	using Ajout::Position;
 
 
-    Cavalier(Position position, Couleur couleur, string nom);
+	class Cavalier : public Piece
+	{
 
-    friend class Plateau;
-    static shared_ptr<Piece> cavalier1;
-    static shared_ptr<Piece> cavalier2;
+	public:
+		Cavalier(Cavalier* cavalier);
 
-    static shared_ptr<Piece> cavalier3;
-    static shared_ptr<Piece> cavalier4;
+		static shared_ptr<Piece> getInstanceCavalierGauche(Couleur couleur);
+		static shared_ptr<Piece> getInstanceCavalierDroite(Couleur couleur);
 
 
-};
+	private:
 
+		bool validationMouvement(Position positionApres, vector<vector<shared_ptr<Piece>>>& tableauEchec);
+
+
+		Cavalier(Position position, Couleur couleur, string nom);
+
+		friend class PieceTableau::Plateau;
+
+		inline static shared_ptr<Piece> cavalier1 = nullptr;
+		inline static shared_ptr<Piece> cavalier2 = nullptr;
+
+		inline static shared_ptr<Piece> cavalier3 = nullptr;
+		inline static shared_ptr<Piece> cavalier4 = nullptr;
+
+
+	};
+
+}

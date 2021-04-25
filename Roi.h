@@ -2,31 +2,40 @@
 #include "PieceTableau.h"
 #include <iostream>
 #include "Ajout.h"
-using namespace std;
 
-
-class Roi : public Piece
+namespace Roi
 {
-public:
+	using namespace std;
 
-    Roi(Roi* roi);
-
-    //Le singleton
-    static shared_ptr<Piece> getInstanceRoi( Couleur couleur);
-    static void effacerInstanceRoi();
+	using PieceTableau::Piece;
+	using Ajout::Couleur;
+	using Ajout::Position;
 
 
-private:
+	class Roi : public Piece
+	{
+	public:
 
-    bool validationMouvement(Position positionApres, vector<vector<shared_ptr<Piece>>> &tableauEchec);
+		Roi(Roi* roi);
 
-    Roi(Position position, Couleur couleur, string nom);
+		//Le singleton
+		static shared_ptr<Piece> getInstanceRoi(Couleur couleur);
+		static void effacerInstanceRoi();
 
-    friend class Plateau;
-    static shared_ptr<Piece> roi1;
-    static shared_ptr<Piece> roi2;
 
-};
+	private:
+		inline static shared_ptr<Piece> roi1 = nullptr;
+
+		bool validationMouvement(Position positionApres, vector<vector<shared_ptr<Piece>>>& tableauEchec);
+
+		Roi(Position position, Couleur couleur, string nom);
+
+		friend class PieceTableau::Plateau;
+
+		inline static shared_ptr<Piece> roi2 = nullptr;
+
+	};
+}
 
 
 

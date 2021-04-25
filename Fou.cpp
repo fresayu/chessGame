@@ -1,136 +1,129 @@
 #include <iostream>
 #include <string>
+#include <cmath>
+#include <iostream>
+#include <memory>
+
+#include "PieceTableau.h";
 #include "Fou.h"
 #include "Ajout.h"
-#include <cmath>
-#include "PieceTableau.h";
 
-
-Fou::Fou(Fou* fou) : Fou(fou->positionActuelle, fou->couleur_, fou->nom_) {
-
+Fou::Fou::Fou(Fou* fou) : Fou(fou->positionActuelle, fou->couleur_, fou->nom_) {
 
 }
 
-shared_ptr<Piece> Fou::getInstanceFouGauche(Couleur couleur) {
+std::shared_ptr<PieceTableau::Piece> Fou::Fou::getInstanceFouGauche(Couleur couleur) {
 
-    if (fou1 == nullptr && couleur == Couleur::blanc) {
-
-
-        fou1 = make_shared<Fou>(Fou({ 0,6 }, Couleur::blanc, "Fou blanc"));
-
-        return fou1;
-    }
-    else if(fou1 != nullptr && couleur == Couleur::blanc) {
-        return fou1;
-    }
-
-    if (fou2 == nullptr && couleur == Couleur::noir) {
-
-        fou2 = make_shared<Fou>(Fou({ 7,3 }, Couleur::noir, "Fou noir"));
-        return fou2;
-    }
-    else if (fou2 != nullptr && couleur == Couleur::noir) {
-        return fou2;
-    }
-
-}
+	if (fou1 == nullptr && couleur == Couleur::blanc) {
 
 
-shared_ptr<Piece> Fou::getInstanceFouDroite(Couleur couleur) {
+		fou1 = make_shared<Fou>(Fou({ 0,6 }, Couleur::blanc, "Fou blanc G"));
 
-    if (fou3 == nullptr && couleur == Couleur::blanc) {
+		return fou1;
+	}
+	else if (fou1 != nullptr && couleur == Couleur::blanc) {
+		return fou1;
+	}
 
-        fou3 = make_shared<Fou>(Fou({ 0,3 }, Couleur::blanc, "Fou blanc"));
+	if (fou2 == nullptr && couleur == Couleur::noir) {
 
-        return fou3;
-    }
-    else if(fou3 != nullptr && couleur == Couleur::blanc) {
-        return fou3;
-    }
-
-    if (fou4 == nullptr && couleur == Couleur::noir) {
-
-        fou4 = make_shared<Fou>(Fou({ 7,6 }, Couleur::noir, "Fou noir"));
-        return fou4;
-    }
-    else if (fou4 != nullptr && couleur == Couleur::noir) {
-        return fou4;
-    }
+		fou2 = make_shared<Fou>(Fou({ 7,3 }, Couleur::noir, "Fou noir G"));
+		return fou2;
+	}
+	else if (fou2 != nullptr && couleur == Couleur::noir) {
+		return fou2;
+	}
 
 }
 
-Fou::Fou(Position position, Couleur couleur, string nom) : Piece(position, couleur, nom) {
-    cout << "La piece " << this->nom_ << " a ete cree a l'endroit ";
+std::shared_ptr<PieceTableau::Piece> Fou::Fou::getInstanceFouDroite(Couleur couleur) {
 
-    position.positionNumerotation();
-    cout << "\n";
+	if (fou3 == nullptr && couleur == Couleur::blanc) {
+
+		fou3 = make_shared<Fou>(Fou({ 0,3 }, Couleur::blanc, "Fou blanc D"));
+
+		return fou3;
+	}
+	else if (fou3 != nullptr && couleur == Couleur::blanc) {
+		return fou3;
+	}
+
+	if (fou4 == nullptr && couleur == Couleur::noir) {
+
+		fou4 = make_shared<Fou>(Fou({ 7,6 }, Couleur::noir, "Fou noir D"));
+		return fou4;
+	}
+	else if (fou4 != nullptr && couleur == Couleur::noir) {
+		return fou4;
+	}
 
 }
 
-bool Fou::validationMouvement(Position positionApres, vector<vector<shared_ptr<Piece>>>& tableauEchec) {
+Fou::Fou::Fou(Position position, Couleur couleur, string nom) : Piece(position, couleur, nom) {
+	cout << "La piece " << this->nom_ << " a ete cree a l'endroit ";
 
-    //Deplacement horizontale
-    if ((abs(positionApres.x - positionActuelle.x) == (abs(positionApres.y - positionActuelle.y)))) {
-        return true;
-    }
-
-
-    return false;
+	position.positionNumerotation();
+	cout << "\n";
 
 }
 
-bool Fou::verificationAutrePiece(Position position, vector<vector<shared_ptr<Piece>>>& tableauEchec) {
-    int nCasesDistance = abs(this->positionActuelle.y - position.y);
+bool Fou::Fou::validationMouvement(Position positionApres, vector<vector<shared_ptr<Piece>>>& tableauEchec) {
 
-    int indexY = this->positionActuelle.y;
-    int indexX = this->positionActuelle.x;
-
-
-  //  cout << "Commencement " << indexX << " " << indexY << endl;
-    // cout << "BTS FOREVER"  << position.positionNumerotation() << endl;
-
-    bool blocage = true;
-
-    for (int i = 0; i < nCasesDistance; i++) {
+	//Deplacement horizontale
+	if ((abs(positionApres.x - positionActuelle.x) == (abs(positionApres.y - positionActuelle.y)))) {
+		return true;
+	}
 
 
-        if ((this->positionActuelle.y - position.y) < 0) indexY++;
-        else indexY--;
+	return false;
 
-        if ((this->positionActuelle.x - position.x) < 0) indexX++;
-        else indexX--;
-   //  cout << "Iteration n " << indexX << " " << indexY << endl;
+}
 
+bool Fou::Fou::verificationAutrePiece(Position position, vector<vector<shared_ptr<Piece>>>& tableauEchec) {
+	int nCasesDistance = abs(this->positionActuelle.y - position.y);
 
-        if (tableauEchec[indexX][indexY] == nullptr){
+	int indexY = this->positionActuelle.y;
+	int indexX = this->positionActuelle.x;
 
+	bool blocage = true;
 
-            blocage = false;
-
-        }
-
-        else {
+	for (int i = 0; i < nCasesDistance; i++) {
 
 
-            blocage = true;
+		if ((this->positionActuelle.y - position.y) < 0) indexY++;
+		else indexY--;
 
-        }
-
-        if (blocage == true) {
-          //  cout << "Bonjour" << endl;
-            if(position.x != indexX || position.y != indexY){
-
-                mouvementPossible = false;
-
-            }
+		if ((this->positionActuelle.x - position.x) < 0) indexX++;
+		else indexX--;
 
 
-            return true;
-        }
+		if (tableauEchec[indexX][indexY] == nullptr) {
 
-    }
 
-    return false;
+			blocage = false;
+
+		}
+
+		else {
+
+
+			blocage = true;
+
+		}
+
+		if (blocage == true) {
+			if (position.x != indexX || position.y != indexY) {
+
+				mouvementPossible = false;
+
+			}
+
+			return true;
+		}
+
+	}
+
+	return false;
 
 }
 

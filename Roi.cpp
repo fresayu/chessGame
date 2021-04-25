@@ -6,73 +6,70 @@
 #include <cmath>
 #include "PieceTableau.h"
 
-shared_ptr<Piece> Roi::getInstanceRoi(Couleur couleur) {
+std::shared_ptr<PieceTableau::Piece> Roi::Roi::getInstanceRoi(Couleur couleur) {
 
 
-    if (roi1 == nullptr && couleur == Couleur::blanc) {
+	if (roi1 == nullptr && couleur == Couleur::blanc) {
 
-        roi1 = make_shared<Roi>(Roi({ 0,5 }, Couleur::blanc, "Roi blanc"));
+		roi1 = make_shared<Roi>(Roi({ 0,5 }, Couleur::blanc, "Roi blanc"));
 
-        return roi1;
-    }
+		return roi1;
+	}
 
-    else if (roi1 != nullptr && couleur == Couleur::blanc) {
-        return roi1;
-    }
+	else if (roi1 != nullptr && couleur == Couleur::blanc) {
+		return roi1;
+	}
 
-    if (roi2 == nullptr && couleur == Couleur::noir) {
+	if (roi2 == nullptr && couleur == Couleur::noir) {
 
-        roi2 = make_shared<Roi>(Roi({ 7,5 }, Couleur::noir, "Roi noir"));
-        return roi2;
-    }
+		roi2 = make_shared<Roi>(Roi({ 7,5 }, Couleur::noir, "Roi noir"));
+		return roi2;
+	}
 
-    else if (roi2 != nullptr && couleur == Couleur::noir) {
-        return roi2;
-    }
-
-
+	else if (roi2 != nullptr && couleur == Couleur::noir) {
+		return roi2;
+	}
 }
 
-void Roi::effacerInstanceRoi() {
+void Roi::Roi::effacerInstanceRoi() {
 
-    roi1 = nullptr;
-    roi2 = nullptr;
+	roi1 = nullptr;
+	roi2 = nullptr;
 
 }
-
 
 //Constructeur par copie
-Roi::Roi(Roi* roi) : Roi(roi->positionActuelle,roi->couleur_,roi->nom_) {
+Roi::Roi::Roi(Roi* roi) : Roi(roi->positionActuelle, roi->couleur_, roi->nom_) {
 
 }
 
 
-bool Roi::validationMouvement(Position positionApres, vector<vector<shared_ptr<Piece>>>& tableauEchec) {
+bool Roi::Roi::validationMouvement(Position positionApres, vector<vector<shared_ptr<Piece>>>& tableauEchec) {
 
-    //Deplacement horizontale
-    if (((abs(positionApres.x - positionActuelle.x) == 1)) && (positionApres.y - positionActuelle.y) == 0) {
-            return true;
-    }
+	//Deplacement horizontale
+	if (((abs(positionApres.x - positionActuelle.x) == 1)) && (positionApres.y - positionActuelle.y) == 0) {
+		return true;
+	}
 
-    //Deplacement verticale
-    else if ((positionApres.x - positionActuelle.x == 0) && (abs(positionApres.y - positionActuelle.y)) == 1) {
-        return true;
-    }
+	//Deplacement verticale
+	else if ((positionApres.x - positionActuelle.x == 0) && (abs(positionApres.y - positionActuelle.y)) == 1) {
+		return true;
+	}
 
-    //Deplacement Diagonale
-    else if ((abs(positionApres.x - positionActuelle.x) == 1) && (abs(positionApres.y - positionActuelle.y)) == 1) {
-        return true;
-    }
+	//Deplacement Diagonale
+	else if ((abs(positionApres.x - positionActuelle.x) == 1) && (abs(positionApres.y - positionActuelle.y)) == 1) {
+		return true;
+	}
 
-    return false;
+	return false;
 
 }
 
-Roi::Roi(Position position, Couleur couleur, string nom) : Piece(position, couleur, nom) {
-    cout << "La piece " << this->nom_ << " a ete cree a l'endroit ";
+Roi::Roi::Roi(Position position, Couleur couleur, string nom) : Piece(position, couleur, nom) {
+	cout << "La piece " << this->nom_ << " a ete cree a l'endroit ";
 
-    position.positionNumerotation();
-    cout << "\n";
+	position.positionNumerotation();
+	cout << "\n";
 
 }
 
