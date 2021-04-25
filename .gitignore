@@ -1,4 +1,4 @@
-
+bibliotheque_cours
 debug
 .vs
 release
@@ -10,3 +10,7 @@ release
 *.vcxproj
 *.filters
 *.ui
+.vscode
+googletest
+include
+x64
