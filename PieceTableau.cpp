@@ -302,6 +302,19 @@ void PieceTableau::Plateau::initialiserJeux() {
 	using Cavalier::Cavalier;
 	using Fou::Fou;
 
+	shared_ptr<Piece> roiBlanc = Roi::getInstanceRoi(Couleur::blanc);
+	shared_ptr<Piece> roiNoir = Roi::getInstanceRoi(Couleur::noir);
+
+	shared_ptr<Piece> cavalierNoirG = Cavalier::getInstanceCavalierGauche(Couleur::noir);
+	shared_ptr<Piece> cavalierBlancG = Cavalier::getInstanceCavalierGauche(Couleur::blanc);
+	shared_ptr<Piece> cavalierNoirD = Cavalier::getInstanceCavalierDroite(Couleur::noir);
+	shared_ptr<Piece> cavalierBlancD = Cavalier::getInstanceCavalierDroite(Couleur::blanc);
+
+	shared_ptr<Piece> fouNoirD = Fou::getInstanceFouDroite(Couleur::noir);
+	shared_ptr<Piece> fouBlancD = Fou::getInstanceFouDroite(Couleur::blanc);
+	shared_ptr<Piece> fouNoirG = Fou::getInstanceFouGauche(Couleur::noir);
+	shared_ptr<Piece> fouBlancG = Fou::getInstanceFouGauche(Couleur::blanc);
+
 	//Roi
 	if (Roi::roi1 != nullptr)
 		tableauEchec[Roi::roi1->positionActuelle.x][Roi::roi1->positionActuelle.y] = Roi::roi1;

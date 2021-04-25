@@ -48,19 +48,7 @@ int main(int argc, char* argv[])
 	using Ajout::Couleur;
 
 
-	//Initialisation des pièces
-	shared_ptr<Piece> roiBlanc = Roi::getInstanceRoi(Couleur::blanc);
-	shared_ptr<Piece> roiNoir = Roi::getInstanceRoi(Couleur::noir);
 
-	shared_ptr<Piece> cavalierNoirG = Cavalier::getInstanceCavalierGauche(Couleur::noir);
-	shared_ptr<Piece> cavalierBlancG = Cavalier::getInstanceCavalierGauche(Couleur::blanc);
-	shared_ptr<Piece> cavalierNoirD = Cavalier::getInstanceCavalierDroite(Couleur::noir);
-	shared_ptr<Piece> cavalierBlancD = Cavalier::getInstanceCavalierDroite(Couleur::blanc);
-
-	shared_ptr<Piece> fouNoirD = Fou::getInstanceFouDroite(Couleur::noir);
-	shared_ptr<Piece> fouBlancD = Fou::getInstanceFouDroite(Couleur::blanc);
-	shared_ptr<Piece> fouNoirG = Fou::getInstanceFouGauche(Couleur::noir);
-	shared_ptr<Piece> fouBlancG = Fou::getInstanceFouGauche(Couleur::blanc);
 
 	QApplication a(argc, argv);
 	Plateau::PlateauEchec w;
