@@ -1,0 +1,12 @@
+image
+debug
+.vs
+release
+.qmake.stash
+*.qrc
+*.user
+*.sln
+*.pro
+*.vcxproj
+*.filters
+
